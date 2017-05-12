@@ -1,0 +1,10 @@
+.button-error {
+    background: rgb(202, 60, 60); /* this is a maroon */
+    color: white;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-div {
+    max-height: 400px;
+    overflow-y: auto;
+}

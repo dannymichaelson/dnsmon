@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block title %}Queries List{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <h1>dnsmon Home</h1>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <form action="." method="POST" class="pure-form">
+        <fieldset>
+            <legend>Update your blocked hosts.</legend>
+
+            <input type="text" name="hostname" placeholder="Domain">
+
+            <button type="submit" name="change-host" value="add" class="pure-button pure-button-primary">Add</button>
+            <button type="submit" name="change-host" value="del" class="pure-button button-error">Remove</button>
+        </fieldset>
+    </form>
+    <div>
+        <h2>Blocked Hosts</h2>
+        <div class="scroll-div">
+            <table class="pure-table pure-table-bordered">
+                <thead>
+                    <tr>
+                        <th>Host</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% if blocked_hosts %}
+                        {% for item in blocked_hosts %}
+                            <tr>
+                                <td>{{ item }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr><td>No Blocked Hosts</td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <h2>Least Requested Hosts (Anomalies)</h2>
+        <div class="scroll-div">
+            <table class="pure-table pure-table-bordered">
+                <thead>
+                    <tr>
+                        <th>Host</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% if min_hosts %}
+                        {% for item in min_hosts %}
+                            <tr>
+                                <td>{{ item }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr><td>No Hosts Queried</td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <h2>Most Requested Hosts</h2>
+        <div class="scroll-div">
+            <table class="pure-table pure-table-bordered">
+                <thead>
+                    <tr>
+                        <th>Host</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% if max_hosts %}
+                        {% for item in max_hosts %}
+                            <tr>
+                                <td>{{ item }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr><td>No Hosts Queried</td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <h2>Blocked Queries</h2>
+        <div class="scroll-div">
+            <table class="pure-table pure-table-bordered">
+                <thead>
+                    <tr>
+                        <th>Host</th>
+                        <th>Requester</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% if blocked_queries %}
+                        {% for item in blocked_queries %}
+                            <tr>
+                                <td>{{ item.hostname }}</td>
+                                <td>{{ item.requester }}</td>
+                                <td>{{ item.date }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr><td>No Blocked Queries</td><td></td><td></td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <h2>Raw Log</h2>
+        <div class="scroll-div">
+            <table>
+                <tbody>
+                    {% for item in logs %}
+                        <tr><td>{{ item }}</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
