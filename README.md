@@ -1,4 +1,4 @@
-# dnsmon
+dnsmon
 ========
 
 ## Note: There is currently no uninstaller.
@@ -24,3 +24,5 @@ visit the web interface at http://127.0.0.1:5000 on the pi or http://<pi-local-i
 Uninstall dnsmasq, or at least replace /etc/dnsmasq.conf with /etc/dnsmasq.conf.orig
 Delete dnsmon user
 Delete /etc/dnsmasq.d/dnsmon.conf
+
+![screenshot](https://github.com/danielmichaelson/dnsmon/blob/master/webinterface.png?raw=true)
